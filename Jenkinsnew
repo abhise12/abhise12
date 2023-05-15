@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+
+ 
+
+  stages {
+    stage('Run Command and Redirect Output') {
+      steps {
+        sh 'ls -al > command.output'
+      }
+    }
+    stage('Copy Output to Jenkins Folder') {
+      steps {
+        script {
+          def jenkinsFolder = "jenkins/${env.USER}"
+          sh "mkdir -p ${jenkinsFolder}"
+          sh "cp command.output ${jenkinsFolder}"
+        }
+      }
+    }
+  }
+}  
