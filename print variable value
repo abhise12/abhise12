@@ -1,0 +1,21 @@
+pipeline{
+  agent any
+   
+   environment {
+     var_email = "support@jenkinsmaster.com"
+  }
+    stages{
+        stage("Print build number and current login username"){
+            steps{
+                echo "Current build number ${BUILD_NUMBER} -> ${BUILD_NUMBER}"
+                }
+            }
+        }
+        stage("Env Job Name"){
+            steps{
+                echo "Current job name ${JOB_NAME} -> ${JOB_NAME}"
+                }
+             }
+          }  
+           
+        
