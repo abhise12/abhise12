@@ -1,0 +1,26 @@
+def display_build_user(name) {
+ echo "Build username: ${name}"
+ return 0
+}
+def display_node_name(nodename){
+ echo "Node name: ${nodename}"
+ return 0
+}
+pipeline {
+ agent any
+ stages {
+ stage("Env Build User"){
+ steps{
+ display_build_user(env.BUILD_USER)
+ display_node_name(env.NODE_NAME) 
+ }
+ }
+ stage("Env Node Name"){
+ agent any  
+ steps{
+ display_build_user(env.BUILD_USER)
+ display_node_name(env.NODE_NAME) 
+ } 
+ }
+ }
+}
