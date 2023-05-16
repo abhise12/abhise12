@@ -2,13 +2,14 @@ pipeline {
     agent any
     stages {
         stage("run command and redirect") {
-            steps {sh 'ps -ef > command.output
+            steps {
+                sh'ps > command.output'
             }
              }
                 stage("copy output to folder") {
                  steps{
                    script {
-                   def jenkins folder= "jenkins/${env.USER}"
+                   def jenkinsfolder= "jenkins/${env.USER}"
                        sh "mkdir -p ${jenkinsfolder}" 
                        sh "cp command.output ${jenkinsfolder}"
                     }
