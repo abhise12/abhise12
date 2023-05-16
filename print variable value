@@ -11,11 +11,5 @@ pipeline{
                 }
             }
         }
-        stage("Env Job Name"){
-            steps{
-                echo "Current job name ${JOB_NAME} -> ${JOB_NAME}"
-                }
-             }
-          }  
-           
         
+    }  
