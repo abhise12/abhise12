@@ -1,26 +1,27 @@
-def display_build_user(abhise) {
- echo "Build username: ${abhise}"
- return 0
-}
-def display_node_name(node1){
- echo "Node name: ${node1}"
- return 0
-}
 pipeline {
- agent {label 'jenkinsnodes'}
- stages {
- stage("Env Build User"){
- steps{
- diplay_build_user(BUILD_USER)
- display_node_name(node1)
- }
- }
- stage("Env Node Name"){
- agent {label node1}
- steps{
- diplay_build_user(abhise)
- display_node_name(node1)
- }
- }
- }
+    agent any
+    stages {
+        stage("run command and redirect") {
+            steps {sh 'ps -ef > command.output
+            }
+             }
+                stage("copy output to folder") {
+                 steps{
+                   script {
+                   def jenkins folder= "jenkins/${env.USER}"
+                       sh "mkdir -p ${jenkinsfolder}" 
+                       sh "cp command.output ${jenkinsfolder}"
+                    }
+                  }
+                }
+                stage("print message") {
+                 parallel {
+                  stage ('print job name') {
+                    steps {
+                     echo "the ${env.JOB_NAME} run on ${env.node_name}"
+                     }
+                }
+            }
+        }
+    }
 }
